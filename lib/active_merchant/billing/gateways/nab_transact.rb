@@ -205,6 +205,9 @@ module ActiveMerchant #:nodoc:
         xml.tag! 'crn', identification
         xml.tag! 'currency', options[:currency] || currency(money)
         xml.tag! 'amount', localized_amount(money, options[:currency] || currency(money))
+        if options[:order_id]
+          xml.tag! 'transactionReference', options[:order_id].to_s.gsub(/[ ']/, '')
+        end
 
         xml.target!
       end
